@@ -1,9 +1,11 @@
 package com.xbot.vktest.di
 
+import android.content.Context
 import com.xbot.vktest.data.FilesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -13,5 +15,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideFilesRepository() = FilesRepository()
+    fun provideFilesRepository(@ApplicationContext context: Context) = FilesRepository(context)
 }

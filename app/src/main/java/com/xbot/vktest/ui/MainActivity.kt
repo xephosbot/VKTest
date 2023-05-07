@@ -1,13 +1,14 @@
 package com.xbot.vktest.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.xbot.vktest.R
 import com.xbot.vktest.databinding.ActivityMainBinding
+import com.xbot.vktest.ui.extensions.setupWithNavController
 import com.xbot.vktest.ui.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         navController = findNavController(R.id.nav_host_fragment)
+
+        binding.toolbar.setupWithNavController(navController)
     }
 
     private fun findNavController(@IdRes id: Int): NavController {

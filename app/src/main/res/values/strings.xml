@@ -1,4 +1,12 @@
-<resources>
-    <string name="app_name">VK Test</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">VK Test</string>
     <string name="leading_icon">Leading icon</string>
+    <string name="nav_app_bar_navigate_up_description" tools:override="true">Navigation up</string>
+    <string name="btn_continue">Continue</string>
+    <string name="permissions_description">Give the VK Test app access to your files and it will help you find images, videos, documents and other data on your device.</string>
+    <string name="permissions">Permissions</string>
+    <plurals name="number_of_folder_items">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
 </resources>

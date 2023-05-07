@@ -1,23 +1,26 @@
 package com.xbot.vktest.ui
 
+import android.content.Context
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.xbot.vktest.databinding.RecyclerItemBinding
-import com.xbot.vktest.model.File
+import com.xbot.vktest.model.FileItem
+import com.xbot.vktest.ui.extensions.toImageResource
 import com.xbot.vktest.ui.extensions.viewBinding
 
-class RecyclerViewAdapter(private val onClick: (File) -> Unit) :
-    ListAdapter<File, RecyclerViewAdapter.FileViewHolder>(DiffCallback) {
+
+class RecyclerViewAdapter(
+    private val onClick: (FileItem) -> Unit
+) : ListAdapter<FileItem, RecyclerViewAdapter.FileViewHolder>(DiffCallback) {
 
     class FileViewHolder(
         private val binding: RecyclerItemBinding,
-        private val onClick: (File) -> Unit
+        private val onClick: (FileItem) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private var currentFile: File? = null
+        private var currentFile: FileItem? = null
 
         init {
             binding.root.setOnClickListener {
@@ -25,11 +28,12 @@ class RecyclerViewAdapter(private val onClick: (File) -> Unit) :
             }
         }
 
-        fun bind(file: File) {
+        fun bind(file: FileItem) {
             currentFile = file
             binding.title.text = file.title
             binding.subtitle.text = file.date
             binding.trailingText.text = file.size
+            binding.leadingIcon.setImageResource(file.type.toImageResource())
         }
     }
 
@@ -43,12 +47,12 @@ class RecyclerViewAdapter(private val onClick: (File) -> Unit) :
         holder.bind(file)
     }
 
-    object DiffCallback : DiffUtil.ItemCallback<File>() {
-        override fun areItemsTheSame(oldItem: File, newItem: File): Boolean {
+    object DiffCallback : DiffUtil.ItemCallback<FileItem>() {
+        override fun areItemsTheSame(oldItem: FileItem, newItem: FileItem): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: File, newItem: File): Boolean {
+        override fun areContentsTheSame(oldItem: FileItem, newItem: FileItem): Boolean {
             return oldItem == newItem
         }
     }

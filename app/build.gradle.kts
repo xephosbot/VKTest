@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.com.dagger.hilt.android)
+    alias(libs.plugins.navigation.safe.args)
 }
 
 android {
@@ -54,6 +55,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    packaging {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+        }
+    }
 }
 
 dependencies {
@@ -61,6 +68,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.activity)
     implementation(libs.fragment)
+    implementation(libs.recyclerview)
     implementation(libs.material)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)

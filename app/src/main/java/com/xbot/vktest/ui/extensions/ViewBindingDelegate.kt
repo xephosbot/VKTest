@@ -1,5 +1,6 @@
 package com.xbot.vktest.ui.extensions
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -3,7 +3,7 @@ package com.xbot.vktest.ui.features.files
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.xbot.vktest.data.FilesRepository
-import com.xbot.vktest.model.File
+import com.xbot.vktest.model.FileItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ class FilesViewModel @Inject constructor(
     private val repository: FilesRepository
 ) : ViewModel() {
 
-    val filesList: StateFlow<List<File>> = repository.data
+    fun getFilesList(path: String): StateFlow<List<FileItem>> = repository.getData(path)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000L),

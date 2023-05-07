@@ -3,11 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/feature_files">
+    app:startDestination="@id/feature_permissions">
 
     <fragment
         android:id="@+id/feature_files"
         android:name="com.xbot.vktest.ui.features.files.FilesFragment"
-        android:label="files"
-        tools:layout="@layout/fragment_files" />
+        android:label="{title}"
+        tools:layout="@layout/fragment_files" >
+
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="VK Test" />
+
+        <argument
+            android:name="path"
+            app:argType="string"
+            android:defaultValue="" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/feature_permissions"
+        android:name="com.xbot.vktest.ui.features.permissions.PermissionsFragment"
+        android:label="@string/permissions"
+        tools:layout="@layout/fragment_permissions" >
+
+        <action
+            android:id="@+id/action_feature_permissions_to_feature_files"
+            app:destination="@id/feature_files"
+            app:popUpTo="@+id/feature_permissions"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
 </navigation>

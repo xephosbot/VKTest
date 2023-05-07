@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="permissions">Разрешения</string>
+    <string name="leading_icon">Ведущий значок</string>
+    <string name="nav_app_bar_navigate_up_description" tools:override="true">Навигация вверх</string>
+    <string name="btn_continue">Продолжить</string>
+    <string name="permissions_description">Предоставьте приложению VK Test доступ к файлам, и оно поможет находить изображения, видео, документы и другие данные на устройстве.</string>
+    <plurals name="number_of_folder_items">
+        <item quantity="one">%d эл-т</item>
+        <item quantity="few">%d эл-та</item>
+        <item quantity="many">%d эл-тов</item>
+        <item quantity="other">%d эл-тов</item>
+    </plurals>
+</resources>
