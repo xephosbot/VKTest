@@ -1,6 +1,5 @@
 package com.xbot.vktest.ui
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
