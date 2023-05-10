@@ -40,12 +40,12 @@ class FilesRepository(
                     when(sortKey) {
                         SORT_BY_NAME_ACS -> sortedBy { it.name }
                         SORT_BY_NAME_DESC -> sortedByDescending { it.name }
-                        SORT_BY_SIZE_ACS -> sortedBy { it.length() }
-                        SORT_BY_SIZE_DESC -> sortedByDescending { it.length() }
-                        SORT_BY_DATE_ACS -> sortedBy { it.lastModified() }
-                        SORT_BY_DATE_DESC -> sortedByDescending { it.lastModified() }
-                        SORT_BY_FORMAT_ACS -> sortedBy { it.format() }
-                        SORT_BY_FORMAT_DESC -> sortedByDescending { it.format() }
+                        SORT_BY_SIZE_ACS -> sortedWith(compareBy<File> { it.length() }.thenBy{ it.name })
+                        SORT_BY_SIZE_DESC -> sortedWith(compareByDescending<File> { it.length() }.thenBy{ it.name })
+                        SORT_BY_DATE_ACS -> sortedWith(compareBy<File> { it.lastModified() }.thenBy{ it.name })
+                        SORT_BY_DATE_DESC -> sortedWith(compareByDescending<File> { it.lastModified() }.thenBy{ it.name })
+                        SORT_BY_FORMAT_ACS -> sortedWith(compareBy<File> { it.format() }.thenBy { it.name })
+                        SORT_BY_FORMAT_DESC -> sortedWith(compareByDescending<File> { it.format() }.thenBy { it.name })
                         else -> sortedBy { it.name }
                     }
                 }

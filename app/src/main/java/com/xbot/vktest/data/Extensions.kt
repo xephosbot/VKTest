@@ -12,7 +12,7 @@ inline fun <K, V, R> Map<out K, V>.orderedFlatMap(transform: (Map.Entry<K, V>) -
 }
 
 fun File.format(): String {
-    return name.split(".").takeIf { it.size > 1 }?.last() ?: ""
+    return name.takeIf { isFile }?.split(".")?.takeIf { it.size > 1 }?.last() ?: ""
 }
 
 fun String.toFileType(): FileType {
