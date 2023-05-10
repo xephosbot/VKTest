@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxWidth="400dp"
+        android:maxWidth="450dp"
         android:text="@string/permissions_description"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />

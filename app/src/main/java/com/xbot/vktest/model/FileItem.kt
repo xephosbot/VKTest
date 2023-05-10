@@ -22,5 +22,6 @@ data class FileItem(
     val date: String,
     val size: String,
     val path: String,
+    val new: Boolean,
     val type: FileType
 )

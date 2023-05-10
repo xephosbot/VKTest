@@ -21,6 +21,14 @@
             app:argType="string"
             android:defaultValue="" />
 
+        <action
+            android:id="@+id/action_feature_files_to_bottom_sheet_sort"
+            app:destination="@id/bottom_sheet_sort" />
+
+        <action
+            android:id="@+id/action_feature_files_self"
+            app:destination="@id/feature_files" />
+
     </fragment>
 
     <fragment
@@ -36,4 +44,10 @@
             app:popUpToInclusive="true"/>
 
     </fragment>
+
+    <dialog
+        android:id="@+id/bottom_sheet_sort"
+        android:name="com.xbot.vktest.ui.features.files.SortDialog"
+        android:label="@string/sort_by" />
+
 </navigation>

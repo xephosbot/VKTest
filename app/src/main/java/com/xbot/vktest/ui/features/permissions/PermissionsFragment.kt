@@ -9,8 +9,8 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -41,9 +41,7 @@ class PermissionsFragment : Fragment(R.layout.fragment_permissions) {
     }
 
     private fun navigateToFiles() {
-        val action = PermissionsFragmentDirections.actionFeaturePermissionsToFeatureFiles(
-            path = DEFAULT_PATH
-        )
+        val action = PermissionsFragmentDirections.actionFeaturePermissionsToFeatureFiles()
         findNavController().navigate(action)
     }
 
@@ -74,7 +72,6 @@ class PermissionsFragment : Fragment(R.layout.fragment_permissions) {
     }
 
     private companion object {
-        val DEFAULT_PATH: String = Environment.getExternalStorageDirectory().path
         private const val READ_EXTERNAL_STORAGE_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE
     }
 }

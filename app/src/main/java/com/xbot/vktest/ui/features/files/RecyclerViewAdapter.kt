@@ -1,11 +1,13 @@
-package com.xbot.vktest.ui
+package com.xbot.vktest.ui.features.files
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.xbot.vktest.R
 import com.xbot.vktest.databinding.RecyclerItemBinding
 import com.xbot.vktest.model.FileItem
+import com.xbot.vktest.ui.extensions.setCompoundDrawable
 import com.xbot.vktest.ui.extensions.toImageResource
 import com.xbot.vktest.ui.extensions.viewBinding
 
@@ -31,7 +33,10 @@ class RecyclerViewAdapter(
             currentFile = file
             binding.title.text = file.title
             binding.subtitle.text = file.date
-            binding.trailingText.text = file.size
+            binding.trailingText.apply {
+                text = file.size
+                setCompoundDrawable(end = if (file.new) R.drawable.badge_drawable else 0)
+            }
             binding.leadingIcon.setImageResource(file.type.toImageResource())
         }
     }

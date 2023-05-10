@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.FloatingWindow
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.transition.TransitionManager
@@ -36,6 +37,10 @@ class ToolbarOnDestinationChangedListener(
             return
         }
 
+        if (destination is FloatingWindow) {
+            return
+        }
+
         val label = destination.label
         if (label != null) {
             val title = StringBuffer()
@@ -56,7 +61,7 @@ class ToolbarOnDestinationChangedListener(
             setTitle(title)
         }
 
-        if (controller.backQueue.size > DEFAULT_BACKSTACK_SIZE) {
+        if (controller.previousBackStackEntry != null) {
             setNavigationIcon(arrowDrawable,  R.string.nav_app_bar_navigate_up_description)
         } else {
             setNavigationIcon(null, 0)
@@ -78,10 +83,6 @@ class ToolbarOnDestinationChangedListener(
                 TransitionManager.beginDelayedTransition(this)
             }
         }
-    }
-
-    private companion object {
-        const val DEFAULT_BACKSTACK_SIZE = 2
     }
 }
 

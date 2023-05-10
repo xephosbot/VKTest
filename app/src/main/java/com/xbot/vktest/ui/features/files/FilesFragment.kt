@@ -1,8 +1,13 @@
 package com.xbot.vktest.ui.features.files
 
 import android.os.Bundle
+import android.os.Environment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
@@ -20,19 +25,23 @@ import com.xbot.vktest.R
 import com.xbot.vktest.databinding.FragmentFilesBinding
 import com.xbot.vktest.model.FileItem
 import com.xbot.vktest.model.FileType
-import com.xbot.vktest.ui.RecyclerViewAdapter
+import com.xbot.vktest.ui.extensions.sharedPref
 import com.xbot.vktest.ui.extensions.toIntent
 import com.xbot.vktest.ui.extensions.viewBinding
 import kotlinx.coroutines.launch
 
-class FilesFragment : Fragment(R.layout.fragment_files) {
+class FilesFragment : Fragment(R.layout.fragment_files), MenuProvider, SortDialog.UpdateDataTrigger {
 
     private val binding: FragmentFilesBinding by viewBinding(FragmentFilesBinding::bind)
     private val viewModel: FilesViewModel by hiltNavGraphViewModels(R.id.nav_graph)
     private val args: FilesFragmentArgs by navArgs()
+    private val sortArg: Int by sharedPref()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         val adapter = RecyclerViewAdapter { file ->
             when(file.type) {
@@ -52,20 +61,43 @@ class FilesFragment : Fragment(R.layout.fragment_files) {
             WindowInsetsCompat.CONSUMED
         }
 
+        updateData()
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.getFilesList(args.path).collect { list ->
+                viewModel.filesList.collect { list ->
                     adapter.submitList(list)
                 }
             }
         }
     }
 
+    override fun updateData() {
+        viewModel.fetchData(args.path.ifEmpty { DEFAULT_PATH }, sortArg)
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.files_appbar_menu, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_sort -> {
+                openSortBottomSheet()
+                true
+            }
+            else -> false
+        }
+    }
+
     private fun navigateToDirectory(file: FileItem) {
-        findNavController().navigate(
-            resId = DESTINATION_ID,
-            args = bundleOf(ARG_TITLE to file.title, ARG_PATH to file.path)
-        )
+        val action = FilesFragmentDirections.actionFeatureFilesSelf(file.title, file.path)
+        findNavController().navigate(action)
+    }
+
+    private fun openSortBottomSheet() {
+        val action = FilesFragmentDirections.actionFeatureFilesToBottomSheetSort()
+        findNavController().navigate(action)
     }
 
     private fun openFile(file: FileItem) {
@@ -83,8 +115,6 @@ class FilesFragment : Fragment(R.layout.fragment_files) {
     }
 
     private companion object {
-        val DESTINATION_ID: Int = R.id.feature_files
-        const val ARG_TITLE = "title"
-        const val ARG_PATH = "path"
+        val DEFAULT_PATH: String = Environment.getExternalStorageDirectory().path
     }
 }

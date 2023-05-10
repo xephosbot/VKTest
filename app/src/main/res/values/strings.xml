@@ -5,8 +5,19 @@
     <string name="btn_continue">Continue</string>
     <string name="permissions_description">Give the VK Test app access to your files and it will help you find images, videos, documents and other data on your device.</string>
     <string name="permissions">Permissions</string>
+    <string name="sort_by">Sort by</string>
     <plurals name="number_of_folder_items">
         <item quantity="one">%d item</item>
         <item quantity="other">%d items</item>
     </plurals>
+    <string-array name="sort_keys">
+        <item>By name (acs.)</item>
+        <item>By name (desc.)</item>
+        <item>By size (acs.)</item>
+        <item>By size (desc.)</item>
+        <item>By date (acs.)</item>
+        <item>By date (desc.)</item>
+        <item>By format (acs.)</item>
+        <item>By format (desc.)</item>
+    </string-array>
 </resources>

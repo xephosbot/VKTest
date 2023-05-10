@@ -1,7 +1,9 @@
 package com.xbot.vktest.di
 
 import android.content.Context
-import com.xbot.vktest.data.FilesRepository
+import androidx.room.Room
+import com.xbot.vktest.data.AppDatabase
+import com.xbot.vktest.data.files.FilesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +17,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideFilesRepository(@ApplicationContext context: Context) = FilesRepository(context)
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, "database-name").build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFilesRepository(
+        database: AppDatabase,
+        @ApplicationContext context: Context
+    ) = FilesRepository(database.fileDao(), context)
 }
