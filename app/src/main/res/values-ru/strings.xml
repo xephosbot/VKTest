@@ -6,6 +6,7 @@
     <string name="btn_continue">Продолжить</string>
     <string name="permissions_description">Предоставьте приложению VK Test доступ к файлам, и оно поможет находить изображения, видео, документы и другие данные на устройстве.</string>
     <string name="sort_by">Сортировать</string>
+    <string name="no_files">Нет файлов</string>
     <plurals name="number_of_folder_items">
         <item quantity="one">%d эл-т</item>
         <item quantity="few">%d эл-та</item>

@@ -6,6 +6,7 @@
     <string name="permissions_description">Give the VK Test app access to your files and it will help you find images, videos, documents and other data on your device.</string>
     <string name="permissions">Permissions</string>
     <string name="sort_by">Sort by</string>
+    <string name="no_files">No files</string>
     <plurals name="number_of_folder_items">
         <item quantity="one">%d item</item>
         <item quantity="other">%d items</item>

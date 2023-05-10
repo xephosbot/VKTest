@@ -10,6 +10,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -67,6 +68,7 @@ class FilesFragment : Fragment(R.layout.fragment_files), MenuProvider, SortDialo
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.filesList.collect { list ->
                     adapter.submitList(list)
+                    updatePlaceholder(list.isEmpty())
                 }
             }
         }
@@ -103,6 +105,11 @@ class FilesFragment : Fragment(R.layout.fragment_files), MenuProvider, SortDialo
     private fun openFile(file: FileItem) {
         val intent = file.toIntent(requireContext())
         requireContext().startActivity(intent)
+    }
+
+    private fun updatePlaceholder(show: Boolean) {
+        binding.recycler.isVisible = !show
+        binding.emptyPlaceholder.isVisible = show
     }
 
     private fun getMaterialDivider(layoutManager: LinearLayoutManager): MaterialDividerItemDecoration {
