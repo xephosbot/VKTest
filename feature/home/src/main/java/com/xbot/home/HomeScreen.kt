@@ -27,7 +27,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
@@ -158,6 +157,6 @@ private fun VideoItem(
             )
         },
         headlineContent = { Text(video.title) },
-        supportingContent = { Text(video.description, maxLines = 3, overflow = TextOverflow.Ellipsis) },
+        supportingContent = { Text(video.duration) },
     )
 }
